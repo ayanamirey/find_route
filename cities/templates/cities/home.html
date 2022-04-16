@@ -10,7 +10,7 @@
     <div class="col-md">
         {%for object in objects_list %}
         <p>
-        {{object.name}}
+            <a href="{% url 'cities:detail' pk=object.pk %}">{{object.name}}</a>
         </p>
         {% endfor %}
     </div>
