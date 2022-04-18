@@ -4,12 +4,11 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, ListView
-# from trains.forms import HtmlForm, TrainForm
+from trains.forms import TrainForm
 from trains.models import Train
 
 __all__ = (
-    'home', 'TrainListView',
-    # 'TrainDetailView', 'TrainCreateView', 'TrainUpdateView', 'post_delete', 
+    'home', 'TrainListView', 'TrainDetailView', 'TrainCreateView', 'TrainUpdateView', 'post_delete',
 )
 
 
@@ -28,29 +27,28 @@ class TrainListView(ListView):
     template_name = 'trains/home.html'
 
 
+class TrainDetailView(DetailView):
+    queryset = Train.objects.all()
+    template_name = 'trains/detail.html'
 
-# class TrainDetailView(DetailView):
-#     queryset = Train.objects.all()
-#     template_name = 'trains/detail.html'
-# 
-# 
-# class TrainCreateView(SuccessMessageMixin, CreateView):
-#     model = Train
-#     form_class = TrainForm
-#     template_name = 'trains/create.html'
-#     success_url = reverse_lazy('trains:home')
-#     success_message = 'Город успешно создан'
-# 
-# 
-# class TrainUpdateView(SuccessMessageMixin, UpdateView):
-#     model = Train
-#     form_class = TrainForm
-#     template_name = 'trains/update.html'
-#     success_url = reverse_lazy('trains:home')
-#     success_message = 'Город успешно отредактирован'
-# 
-# 
-# def post_delete(request, pk=None):
-#     post = get_object_or_404(Train, pk=pk).delete()
-#     messages.success(request, 'Город успешно удален')
-#     return redirect('trains:home')
+
+class TrainCreateView(SuccessMessageMixin, CreateView):
+    model = Train
+    form_class = TrainForm
+    template_name = 'trains/create.html'
+    success_url = reverse_lazy('trains:home')
+    success_message = 'Поезд успешно создан'
+
+
+class TrainUpdateView(SuccessMessageMixin, UpdateView):
+    model = Train
+    form_class = TrainForm
+    template_name = 'trains/update.html'
+    success_url = reverse_lazy('trains:home')
+    success_message = 'Поезд успешно отредактирован'
+
+
+def post_delete(request, pk=None):
+    post = get_object_or_404(Train, pk=pk).delete()
+    messages.success(request, 'Поезд успешно удален')
+    return redirect('trains:home')

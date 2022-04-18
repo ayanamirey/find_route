@@ -41,30 +41,27 @@
                 <th>Откуда</th>
                 <th>Куда</th>
                 <th>Время в пути</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
             </tr>
             {%for object in page_obj %}
             <tr>
                 <td>
-                    {# <a href="{% url 'trains:detail' pk=object.pk %}">{{object.name}}</a> #}
-                        {{object.name}}
+                    <a href="{% url 'trains:detail' pk=object.pk %}">{{object.name}}</a>
                 </td>
                 <td>{{object.from_city}}</td>
                 <td>{{object.to_city}}</td>
                 <td>{{object.travel_time}}</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-<!--                <td>-->
-<!--                    <a href="{% url 'cities:update' pk=object.pk %}">-->
-<!--                        <button class="btn btn-primary" type="submit">Редактирование</button>-->
-<!--                    </a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a href="{% url 'cities:delete' pk=object.pk %}">-->
-<!--                        <button class="btn btn-danger" type="submit">Удалить</button>-->
-<!--                    </a>-->
-<!--                </td>-->
+                <td>
+                    <a href="{% url 'trains:update' pk=object.pk %}">
+                        <button class="btn btn-primary" type="submit">Редактировать</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'trains:delete' pk=object.pk %}">
+                        <button class="btn btn-danger" type="submit">Удалить</button>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </table>
@@ -99,8 +96,6 @@
         </li>
     </ul>
 </nav>
-
-
 
 
 {% endblock %}
