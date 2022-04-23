@@ -34,7 +34,8 @@ def home(request, pk=None):
 
 
 class CityDetailView(DetailView):
-    queryset = City.objects.all()
+    # queryset = City.objects.all()
+
     template_name = 'cities/detail.html'
 
 
