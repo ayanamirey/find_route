@@ -21,7 +21,7 @@ def get_graph(qs):
     return graph
 
 
-def get_routes(request, form) -> dict:
+def get_routes(request, form):
     context = {'form': form}
     qs = Train.objects.all().select_related('from_city', 'to_city')
     graph = get_graph(qs)
