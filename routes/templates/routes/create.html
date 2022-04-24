@@ -7,7 +7,23 @@
 {% block content %}
 <h1>Создание маршрута</h1>
 
-{% url 'save_routes' as action %}
-{% include 'form.html' with button='Сохранить' action=action %}
+
+<div class="row">
+    <div class="col-md-4">
+        <form action="{% url 'save_routes' %}" method="post"> {% csrf_token %}
+            {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field }}
+                {% if field.help_text %}
+                <p class="help">{% if field.help_text|safe %}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <br>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
